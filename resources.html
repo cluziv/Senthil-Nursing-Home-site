@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Resources | Senthil Nursing Home</title>
+<meta name="description" content="Diabetes education, respiratory health guides, nutrition tips and FAQs from Senthil Nursing Home, Coimbatore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- ================= NAV ================= -->
+<nav class="nav" id="mainNav">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand">
+      <img src="Images/Logo.jpg" alt="Senthil Nursing Home logo" class="brand-mark">
+      <span class="brand-text">
+        <span class="name">Senthil Nursing Home</span>
+        <span class="sub">Est. 1998 · Coimbatore</span>
+      </span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="doctors.html">Doctors</a>
+      <a href="specialities.html">Specialities</a>
+      <a href="services.html">Services</a>
+      <a href="resources.html">Resources</a>
+      <a href="community.html">Community</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-actions">
+      <a class="nav-call" href="tel:+919787000755">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5c0 8.3 6.7 15 15 15l3-4-6-3-2 2c-2.5-1.2-4.8-3.5-6-6l2-2-3-6-3 4z"/></svg>
+        <span>+91 97870 00755</span>
+      </a>
+      <a href="contact.html" class="btn btn-primary btn-sm">Book Appointment</a>
+      <button class="burger" id="burgerBtn" aria-label="Open menu"><span></span></button>
+    </div>
+  </div>
+  <div class="vitals-track"><div class="vitals-fill" id="vitalsFill"></div></div>
+</nav>
+<div class="mobile-panel" id="mobilePanel">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="doctors.html">Doctors</a>
+  <a href="specialities.html">Specialities</a>
+  <a href="services.html">Services</a>
+  <a href="resources.html">Resources</a>
+  <a href="community.html">Community</a>
+  <a href="contact.html">Contact</a>
+  <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px;">
+    <a href="tel:+919787000755" class="btn btn-outline">Call Now: +91 97870 00755</a>
+    <a href="contact.html" class="btn btn-primary">Book Appointment</a>
+  </div>
+</div>
+<!-- ================= RESOURCES PAGE ================= -->
+
+  <section class="section" style="padding-top:56px;">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Patient Resources</span>
+        <h2>Learn, Prepare, Stay Well</h2>
+        <p>Guides and answers to help you get the most from every visit to SNH.</p>
+      </div>
+
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="text" id="resourceSearch" placeholder="Search resources, e.g. diabetes, nutrition, insurance...">
+      </div>
+
+      <div class="filter-row" id="resourceFilters">
+        <button class="filter-btn active" data-cat="all">All</button>
+        <button class="filter-btn" data-cat="diabetes">Diabetes Education</button>
+        <button class="filter-btn" data-cat="respiratory">Respiratory Health</button>
+        <button class="filter-btn" data-cat="nutrition">Nutrition Guides</button>
+        <button class="filter-btn" data-cat="preventive">Preventive Care</button>
+        <button class="filter-btn" data-cat="insurance">Insurance</button>
+      </div>
+
+      <div class="grid-3" id="blogGrid">
+        <div class="blog-card reveal" data-cat="diabetes" data-title="managing blood sugar day to day">
+          <div class="blog-thumb"></div>
+          <div class="blog-body"><span class="blog-cat">Diabetes Education</span><h4>Managing Blood Sugar Day to Day</h4><p>Practical habits our diabetology team recommends between visits.</p></div>
+        </div>
+        <div class="blog-card reveal" data-cat="respiratory" data-title="recognising early asthma triggers">
+          <div class="blog-thumb"></div>
+          <div class="blog-body"><span class="blog-cat">Respiratory Health</span><h4>Recognising Early Asthma Triggers</h4><p>What to watch for at home, work, and during seasonal changes.</p></div>
+        </div>
+        <div class="blog-card reveal" data-cat="nutrition" data-title="eating well with diabetes a family guide">
+          <div class="blog-thumb"></div>
+          <div class="blog-body"><span class="blog-cat">Nutrition Guides</span><h4>Eating Well With Diabetes: A Family Guide</h4><p>Meal planning tips that work for South Indian households.</p></div>
+        </div>
+        <div class="blog-card reveal" data-cat="preventive" data-title="why annual checkups catch problems early">
+          <div class="blog-thumb"></div>
+          <div class="blog-body"><span class="blog-cat">Preventive Care</span><h4>Why Annual Checkups Catch Problems Early</h4><p>The case for screening before symptoms appear.</p></div>
+        </div>
+        <div class="blog-card reveal" data-cat="respiratory" data-title="living well with copd">
+          <div class="blog-thumb"></div>
+          <div class="blog-body"><span class="blog-cat">Respiratory Health</span><h4>Living Well With COPD</h4><p>Breathing exercises and lifestyle changes that help.</p></div>
+        </div>
+        <div class="blog-card reveal" data-cat="insurance" data-title="understanding your insurance coverage at snh">
+          <div class="blog-thumb"></div>
+          <div class="blog-body"><span class="blog-cat">Insurance</span><h4>Understanding Your Coverage at SNH</h4><p>What to bring, and how our billing team can help.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-soft">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">FAQs</span><h2>Frequently Asked Questions</h2></div>
+      <div id="faqList" style="max-width:760px;">
+        <div class="faq-item">
+          <div class="faq-q">Do I need an appointment for OP consultation?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          <div class="faq-a">Walk-ins are welcome, but booking ahead through our appointment form or by phone helps reduce your wait time.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What documents should I bring for a diabetes consultation?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          <div class="faq-a">Please bring any previous test reports, current medications, and a recent blood sugar log if you track one.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Does SNH offer emergency services?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          <div class="faq-a">Yes, emergency support is available during working hours. For life-threatening emergencies, please call ahead so our team can prepare.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can I request health packages without a doctor referral?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          <div class="faq-a">Yes, our health checkup packages can be booked directly — no referral required.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Is homeopathy offered alongside conventional treatment?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+          <div class="faq-a">Yes, Dr. Jayanthy works alongside our physicians so you can combine approaches where appropriate.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg width="34" height="34" viewBox="0 0 42 42" fill="none"><circle cx="21" cy="21" r="20" fill="#00A8A8"/><path d="M21 10v22M10 21h22" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/></svg>
+          <span class="name">Senthil Nursing Home</span>
+        </div>
+        <p style="font-size:13.5px;max-width:280px;">Trusted Care. Advanced Medicine. Better Lives. Serving Madukkarai, Coimbatore since 1998.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="doctors.html">Doctors</a></li>
+          <li><a href="specialities.html">Specialities</a></li>
+          <li><a href="services.html">Services</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="resources.html">Patient Resources</a></li>
+          <li><a href="community.html">Community Initiatives</a></li>
+          <li><a href="services.html">Health Packages</a></li>
+          <li><a href="contact.html">Book Appointment</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>+91 97870 00755</li>
+          <li>senthilnursinghomecbe@gmail.com</li>
+          <li>Madukkarai, Coimbatore – 641105</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> Senthil Nursing Home. All rights reserved.</span>
+      <span>Trusted Care. Advanced Medicine. Better Lives.</span>
+    </div>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
