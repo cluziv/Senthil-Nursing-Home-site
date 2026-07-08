@@ -35,7 +35,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5c0 8.3 6.7 15 15 15l3-4-6-3-2 2c-2.5-1.2-4.8-3.5-6-6l2-2-3-6-3 4z"/></svg>
         <span>+91 97870 00755</span>
       </a>
-      <a href="contact.html" class="btn btn-primary btn-sm">Book Appointment</a>
+      <a href="contact.html" class="btn btn-primary btn-sm btn-book">Book Appointment</a>
       <button class="burger" id="burgerBtn" aria-label="Open menu"><span></span></button>
     </div>
   </div>
@@ -52,7 +52,7 @@
   <a href="contact.html">Contact</a>
   <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px;">
     <a href="tel:+919787000755" class="btn btn-outline">Call Now: +91 97870 00755</a>
-    <a href="contact.html" class="btn btn-primary">Book Appointment</a>
+    <a href="contact.html" class="btn btn-primary btn-book">Book Appointment</a>
   </div>
 </div>
 <!-- ================= RESOURCES PAGE ================= -->
@@ -72,12 +72,18 @@
 
       <div class="filter-row" id="resourceFilters">
         <button class="filter-btn active" data-cat="all">All</button>
-        <button class="filter-btn" data-cat="diabetes">Diabetes Education</button>
-        <button class="filter-btn" data-cat="respiratory">Respiratory Health</button>
-        <button class="filter-btn" data-cat="nutrition">Nutrition Guides</button>
-        <button class="filter-btn" data-cat="preventive">Preventive Care</button>
-        <button class="filter-btn" data-cat="insurance">Insurance</button>
+        <button class="filter-btn" data-cat="diabetes">Diabetes Education <span class="chev">▾</span></button>
+        <button class="filter-btn" data-cat="respiratory">Respiratory Health <span class="chev">▾</span></button>
+        <button class="filter-btn" data-cat="nutrition">Nutrition Guides <span class="chev">▾</span></button>
+        <button class="filter-btn" data-cat="preventive">Preventive Care <span class="chev">▾</span></button>
+        <button class="filter-btn" data-cat="insurance">Insurance <span class="chev">▾</span></button>
       </div>
+
+      <div class="filter-drop" data-panel="diabetes"><div class="filter-drop-inner"><strong>Diabetes Education —</strong> Our diabetology team supports patients with blood sugar monitoring guidance, medication and insulin management, diet planning suited to South Indian meals, and regular foot-care screening to prevent complications.</div></div>
+      <div class="filter-drop" data-panel="respiratory"><div class="filter-drop-inner"><strong>Respiratory Health —</strong> We help patients manage asthma, COPD and seasonal allergies with proper inhaler technique, trigger identification, spirometry testing, and personalised breathing exercise plans.</div></div>
+      <div class="filter-drop" data-panel="nutrition"><div class="filter-drop-inner"><strong>Nutrition Guides —</strong> Practical, family-friendly meal planning guidance covering portion control, diabetic-friendly recipes, and everyday South Indian food swaps that support long-term health.</div></div>
+      <div class="filter-drop" data-panel="preventive"><div class="filter-drop-inner"><strong>Preventive Care —</strong> Annual health checkups and screenings help catch issues like high blood pressure, blood sugar changes, or early lung concerns before symptoms appear.</div></div>
+      <div class="filter-drop" data-panel="insurance"><div class="filter-drop-inner"><strong>Insurance —</strong> Our billing desk can help you understand what documents to bring, verify coverage with your insurer, and guide you through the claims process for eligible treatments.</div></div>
 
       <div class="grid-3" id="blogGrid">
         <div class="blog-card reveal" data-cat="diabetes" data-title="managing blood sugar day to day">
@@ -180,5 +186,33 @@
   </div>
 </footer>
 <script src="script.js"></script>
+<script>
+(function(){
+  var buttons = document.querySelectorAll('#resourceFilters .filter-btn');
+  var cards = document.querySelectorAll('#blogGrid .blog-card');
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var cat = btn.getAttribute('data-cat');
+
+      buttons.forEach(function(b){ b.classList.remove('active','open'); });
+      btn.classList.add('active');
+
+      document.querySelectorAll('.filter-drop').forEach(function(panel){
+        if(panel.getAttribute('data-panel') === cat){
+          var willOpen = !panel.classList.contains('open');
+          document.querySelectorAll('.filter-drop').forEach(function(p){ p.classList.remove('open'); });
+          if(willOpen){ panel.classList.add('open'); btn.classList.add('open'); }
+        } else {
+          panel.classList.remove('open');
+        }
+      });
+
+      cards.forEach(function(card){
+        card.style.display = (cat === 'all' || card.getAttribute('data-cat') === cat) ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
