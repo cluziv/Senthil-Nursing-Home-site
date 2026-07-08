@@ -278,8 +278,9 @@ button{font-family:var(--ff-body);cursor:pointer;border:none;background:none;}
 .spec-detail.active{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
 .feat-list li{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;font-size:14.5px;color:var(--gray-600);}
 .feat-list svg{width:18px;height:18px;color:var(--emerald);flex-shrink:0;margin-top:2px;}
-.spec-visual{height:320px;border-radius:20px;background:linear-gradient(150deg,var(--blue-700),var(--teal));display:flex;align-items:center;justify-content:center;}
+.spec-visual{height:320px;border-radius:20px;background:linear-gradient(150deg,var(--blue-700),var(--teal));display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:var(--shadow-md);}
 .spec-visual svg{width:96px;height:96px;color:rgba(255,255,255,.85);}
+.spec-visual img{width:100%;height:100%;object-fit:cover;display:block;}
 
 /* Services */
 .svc-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:28px 24px;transition:.3s;}
