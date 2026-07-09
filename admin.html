@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff Login | Senthil Nursing Home</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#00A8A8;
+    --teal-dark:#00807f;
+    --ink:#16232b;
+    --gray-600:#5b6b73;
+    --gray-200:#e4eaec;
+    --bg:#f4f8f8;
+    --danger:#c1443a;
+    --ok:#1e8f5e;
+    --warn:#b8860b;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);}
+  h1,h2,h3{font-family:'Poppins',sans-serif;margin:0;}
+
+  /* ---- Login screen ---- */
+  #loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+  .login-card{background:#fff;border:1px solid var(--gray-200);border-radius:16px;padding:36px 32px;width:100%;max-width:380px;box-shadow:0 20px 40px -20px rgba(0,0,0,.15);}
+  .login-card h1{font-size:20px;color:var(--teal-dark);margin-bottom:4px;}
+  .login-card p{font-size:13.5px;color:var(--gray-600);margin:0 0 22px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;}
+  .field input{width:100%;padding:10px 12px;border:1px solid var(--gray-200);border-radius:8px;font-size:14px;font-family:inherit;}
+  .field input:focus{outline:2px solid var(--teal);outline-offset:1px;}
+  .btn{border:none;border-radius:8px;padding:11px 16px;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;}
+  .btn-primary{background:var(--teal);color:#fff;width:100%;}
+  .btn-primary:hover{background:var(--teal-dark);}
+  .btn-primary:disabled{opacity:.6;cursor:not-allowed;}
+  #loginError{color:var(--danger);font-size:13px;margin-top:12px;display:none;}
+
+  /* ---- Dashboard ---- */
+  #dashboard{display:none;}
+  header.top{background:#fff;border-bottom:1px solid var(--gray-200);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;}
+  header.top h1{font-size:18px;color:var(--teal-dark);}
+  header.top .sub{font-size:12.5px;color:var(--gray-600);}
+  .btn-outline{background:none;border:1px solid var(--gray-200);border-radius:8px;padding:8px 14px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;font-family:inherit;}
+  .btn-outline:hover{border-color:var(--teal);color:var(--teal-dark);}
+
+  main{padding:24px;max-width:1200px;margin:0 auto;}
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px;}
+  .toolbar select,.toolbar input{padding:9px 12px;border:1px solid var(--gray-200);border-radius:8px;font-size:13.5px;font-family:inherit;background:#fff;}
+  .toolbar .count{margin-left:auto;font-size:13px;color:var(--gray-600);}
+
+  .table-wrap{background:#fff;border:1px solid var(--gray-200);border-radius:12px;overflow:auto;}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:920px;}
+  th{text-align:left;padding:12px 14px;background:var(--bg);border-bottom:1px solid var(--gray-200);font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:var(--gray-600);position:sticky;top:0;}
+  td{padding:12px 14px;border-bottom:1px solid var(--gray-200);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:#fafcfc;}
+  .muted{color:var(--gray-600);}
+  .status-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;}
+  .status-pending{background:#fdf3dd;color:var(--warn);}
+  .status-confirmed{background:#e2f5ec;color:var(--ok);}
+  .status-cancelled{background:#fbe9e7;color:var(--danger);}
+  .status-completed{background:#e7edf5;color:#3a5a8c;}
+  select.status-select{border:1px solid var(--gray-200);border-radius:6px;padding:5px 8px;font-size:12.5px;font-family:inherit;}
+  .empty,.loading{padding:40px;text-align:center;color:var(--gray-600);}
+</style>
+</head>
+<body>
+
+<!-- ================= LOGIN ================= -->
+<div id="loginScreen">
+  <div class="login-card">
+    <h1>Staff Portal</h1>
+    <p>Senthil Nursing Home — sign in to view appointment requests.</p>
+    <form id="loginForm">
+      <div class="field">
+        <label for="l-email">Email</label>
+        <input id="l-email" type="email" required autocomplete="username" placeholder="staff@senthilnursinghome.com">
+      </div>
+      <div class="field">
+        <label for="l-pass">Password</label>
+        <input id="l-pass" type="password" required autocomplete="current-password" placeholder="••••••••">
+      </div>
+      <button type="submit" class="btn btn-primary" id="loginBtn">Sign In</button>
+      <div id="loginError"></div>
+    </form>
+  </div>
+</div>
+
+<!-- ================= DASHBOARD ================= -->
+<div id="dashboard">
+  <header class="top">
+    <div>
+      <h1>Appointment Requests</h1>
+      <div class="sub" id="staffEmail"></div>
+    </div>
+    <button class="btn-outline" id="logoutBtn">Sign Out</button>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <select id="statusFilter">
+        <option value="">All statuses</option>
+        <option value="pending">Pending</option>
+        <option value="confirmed">Confirmed</option>
+        <option value="cancelled">Cancelled</option>
+        <option value="completed">Completed</option>
+      </select>
+      <input type="date" id="dateFilter">
+      <button class="btn-outline" id="refreshBtn">Refresh</button>
+      <span class="count" id="rowCount"></span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Submitted</th>
+            <th>Patient</th>
+            <th>Contact</th>
+            <th>Preferred Visit</th>
+            <th>Doctor / Specialty</th>
+            <th>Reason</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="apptRows">
+          <tr><td colspan="7" class="loading">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  // TODO: same values as in contact.html
+  const SUPABASE_URL = "https://dhkachypshwnpizebjix.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_CoJ4gVviGhUHO0isXXHVYA_pWAStPDm";
+
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const loginScreen = document.getElementById("loginScreen");
+  const dashboard = document.getElementById("dashboard");
+  const loginForm = document.getElementById("loginForm");
+  const loginBtn = document.getElementById("loginBtn");
+  const loginError = document.getElementById("loginError");
+  const staffEmail = document.getElementById("staffEmail");
+  const apptRows = document.getElementById("apptRows");
+  const rowCount = document.getElementById("rowCount");
+  const statusFilter = document.getElementById("statusFilter");
+  const dateFilter = document.getElementById("dateFilter");
+
+  // ---- Auth state ----
+  async function checkSession() {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) {
+      showDashboard(session);
+    } else {
+      loginScreen.style.display = "flex";
+      dashboard.style.display = "none";
+    }
+  }
+
+  function showDashboard(session) {
+    loginScreen.style.display = "none";
+    dashboard.style.display = "block";
+    staffEmail.textContent = session.user.email;
+    loadAppointments();
+  }
+
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    loginError.style.display = "none";
+    loginBtn.disabled = true;
+    loginBtn.textContent = "Signing in...";
+
+    const email = document.getElementById("l-email").value.trim();
+    const password = document.getElementById("l-pass").value;
+
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+
+    loginBtn.disabled = false;
+    loginBtn.textContent = "Sign In";
+
+    if (error) {
+      loginError.textContent = "Incorrect email or password.";
+      loginError.style.display = "block";
+      return;
+    }
+    showDashboard(data.session);
+  });
+
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
+    await sb.auth.signOut();
+    checkSession();
+  });
+
+  // ---- Appointments table ----
+  async function loadAppointments() {
+    apptRows.innerHTML = '<tr><td colspan="7" class="loading">Loading...</td></tr>';
+
+    let query = sb.from("appointments").select("*").order("preferred_date", { ascending: true });
+    if (statusFilter.value) query = query.eq("status", statusFilter.value);
+    if (dateFilter.value) query = query.eq("preferred_date", dateFilter.value);
+
+    const { data, error } = await query;
+
+    if (error) {
+      apptRows.innerHTML = `<tr><td colspan="7" class="empty">Couldn't load requests: ${error.message}</td></tr>`;
+      return;
+    }
+
+    if (!data.length) {
+      apptRows.innerHTML = '<tr><td colspan="7" class="empty">No appointment requests found.</td></tr>';
+      rowCount.textContent = "";
+      return;
+    }
+
+    rowCount.textContent = `${data.length} request${data.length === 1 ? "" : "s"}`;
+
+    apptRows.innerHTML = data.map(rowHtml).join("");
+
+    document.querySelectorAll(".status-select").forEach(sel => {
+      sel.addEventListener("change", async (e) => {
+        const id = e.target.dataset.id;
+        const newStatus = e.target.value;
+        const { error } = await sb.from("appointments").update({ status: newStatus }).eq("id", id);
+        if (error) {
+          alert("Couldn't update status: " + error.message);
+          loadAppointments();
+        }
+      });
+    });
+  }
+
+  function rowHtml(a) {
+    const submitted = new Date(a.created_at).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+    const visitDate = new Date(a.preferred_date + "T00:00:00").toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+    return `
+      <tr>
+        <td class="muted">${escapeHtml(submitted)}</td>
+        <td>
+          <div style="font-weight:600;">${escapeHtml(a.full_name)}</div>
+          <div class="muted">${escapeHtml(a.age)} yrs · ${escapeHtml(a.gender)}</div>
+        </td>
+        <td>
+          <div>${escapeHtml(a.phone)}</div>
+          <div class="muted">${escapeHtml(a.email || "—")}</div>
+        </td>
+        <td>
+          <div>${escapeHtml(visitDate)}</div>
+          <div class="muted">${escapeHtml(a.preferred_time)}</div>
+        </td>
+        <td>
+          <div>${escapeHtml(a.doctor || "No preference")}</div>
+          <div class="muted">${escapeHtml(a.specialty || "—")}</div>
+        </td>
+        <td class="muted" style="max-width:220px;">${escapeHtml(a.symptoms || "—")}</td>
+        <td>
+          <select class="status-select status-${escapeHtml(a.status)}" data-id="${a.id}">
+            <option value="pending" ${a.status === "pending" ? "selected" : ""}>Pending</option>
+            <option value="confirmed" ${a.status === "confirmed" ? "selected" : ""}>Confirmed</option>
+            <option value="cancelled" ${a.status === "cancelled" ? "selected" : ""}>Cancelled</option>
+            <option value="completed" ${a.status === "completed" ? "selected" : ""}>Completed</option>
+          </select>
+        </td>
+      </tr>`;
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, (m) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    })[m]);
+  }
+
+  statusFilter.addEventListener("change", loadAppointments);
+  dateFilter.addEventListener("change", loadAppointments);
+  document.getElementById("refreshBtn").addEventListener("click", loadAppointments);
+
+  checkSession();
+</script>
+</body>
+</html>
