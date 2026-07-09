@@ -147,16 +147,11 @@ if(filterBtns.length && blogCards.length){
 }
 
 // ---------- Appointment form (contact page) ----------
-const apptForm = document.getElementById('apptForm');
-if(apptForm){
-  apptForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const successEl = document.getElementById('formSuccess');
-    successEl.classList.add('show');
-    apptForm.reset();
-    successEl.scrollIntoView({behavior:'smooth', block:'center'});
-  });
-}
+// NOTE: form submission is now handled by the Supabase script
+// at the bottom of contact.html, which actually saves the
+// appointment to the database. Do not add a submit handler
+// for #apptForm here — it would show a fake success message
+// without saving anything.
 
 // ---------- Footer year ----------
 const yrEl = document.getElementById('yr');
