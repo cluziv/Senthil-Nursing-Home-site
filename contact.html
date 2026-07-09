@@ -232,7 +232,11 @@
 
     apptForm.reset();
     apptForm.style.display = "none";
-    if (formSuccess) formSuccess.style.display = "flex";
+    if (formSuccess) {
+      formSuccess.classList.add("show");
+      formSuccess.style.display = "flex";
+      formSuccess.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
   });
 </script>
 </body>
