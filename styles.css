@@ -407,6 +407,33 @@ footer{background:var(--navy);color:#9FB3C2;padding:64px 0 28px;}
   .section{padding:64px 0;}
   .hero-features{grid-template-columns:1fr;}
   .cta-banner{padding:44px 24px;}
+
+  /* Fix: vitals-card/pulse/caption were absolutely positioned inside a
+     fixed-height hero-visual, so on narrow screens the 3-col grid wrapped
+     to 2 lines, grew taller than the box, and overlapped the caption below.
+     Switch to normal stacked flow on mobile instead of absolute overlays. */
+  .hero-visual{
+    height:auto;
+    min-height:0;
+    padding:20px 18px 22px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .hero-visual .grain{display:none;}
+  .vitals-card{
+    position:static;
+    top:auto;left:auto;right:auto;
+  }
+  .vitals-grid{grid-template-columns:repeat(2,1fr);}
+  .pulse-wrap{
+    position:static;
+    height:70px;
+  }
+  .hero-caption{
+    position:static;
+    padding:0 2px;
+  }
 }
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
